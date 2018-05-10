@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="18dp"
-    tools:context=".MainActivity">
+    tools:context=".authorization.AuthorizationActivity">
 
     <View
         android:id="@+id/viewL"
@@ -17,7 +17,7 @@
         android:id="@+id/tv_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="8dp"
+        android:paddingStart="4dp"
         android:text="@string/email"
         app:layout_constraintTop_toBottomOf="@id/viewL"
 
@@ -33,7 +33,7 @@
         android:id="@+id/tv_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="8dp"
+        android:paddingStart="4dp"
         android:paddingTop="8dp"
         android:text="@string/password"
         app:layout_constraintTop_toBottomOf="@id/et_email"
@@ -49,7 +49,7 @@
         android:id="@+id/btn_signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:padding="16dp"
         android:textColor="@color/colorWhiteTextOnBlue"
         android:background="@drawable/btn_sign_in"

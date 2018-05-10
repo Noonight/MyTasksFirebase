@@ -1,4 +1,4 @@
-package com.arkhipov.ayur.mytasksfirebase
+package com.arkhipov.ayur.mytasksfirebase.authorization
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -6,20 +6,20 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
+import com.arkhipov.ayur.mytasksfirebase.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_authorization.*
 import kotlinx.android.synthetic.main.toast.view.*
 
 
-class MainActivity : AppCompatActivity() {
+class AuthorizationActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_authorization)
 
         mAuth = FirebaseAuth.getInstance()
 
