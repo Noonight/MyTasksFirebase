@@ -14,4 +14,19 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+
+    @Test
+    fun checkNumber() {
+        assertEquals(instance(), 2)
+    }
+
+    fun instance(): Int {
+        return 2
+    }
+
+    fun instance2() = 2
+
+    fun sort(array: ArrayList<Int>) {
+        return array.sort()
+    }
 }
