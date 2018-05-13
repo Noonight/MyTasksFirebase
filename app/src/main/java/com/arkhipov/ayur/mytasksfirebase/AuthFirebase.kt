@@ -7,7 +7,8 @@ class AuthFirebase(val mAuth: FirebaseAuth = FirebaseAuth.getInstance()) {
 
     fun getCurrentUser() = mAuth.currentUser
 
-    fun createAccount(email: String, password: String, completeListener: CompleteListener) {
+    fun createAccount(email: String, password: String,
+                      completeListener: CompleteListener) {
         if (!isNullEmailPassword(email, password)) {
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
@@ -15,6 +16,7 @@ class AuthFirebase(val mAuth: FirebaseAuth = FirebaseAuth.getInstance()) {
                             completeListener.complete()
                         } else {
                             completeListener.notComplete(task.exception!!)
+//                            completeListener.notComplete(task.exception!!)
                         }
 
                         // ...
@@ -23,7 +25,8 @@ class AuthFirebase(val mAuth: FirebaseAuth = FirebaseAuth.getInstance()) {
 
     }
 
-    fun signIn(email: String, password: String, completeListener: CompleteListener) {
+    fun signIn(email: String, password: String,
+               completeListener: CompleteListener) {
         if (!isNullEmailPassword(email, password)) {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
@@ -31,6 +34,7 @@ class AuthFirebase(val mAuth: FirebaseAuth = FirebaseAuth.getInstance()) {
                             completeListener.complete()
                         } else {
                             completeListener.notComplete(task.exception!!)
+//                            completeListener.notComplete(task.exception!!)
                         }
 
                         // ...
@@ -46,6 +50,13 @@ class AuthFirebase(val mAuth: FirebaseAuth = FirebaseAuth.getInstance()) {
     interface CompleteListener {
         fun complete()
         fun notComplete(exception: Exception)
+        /*interface Complete {
+            fun complete()
+        }
+
+        interface NotComplete {
+            fun notComplete(exception: Exception)
+        }*/
     }
 
 }

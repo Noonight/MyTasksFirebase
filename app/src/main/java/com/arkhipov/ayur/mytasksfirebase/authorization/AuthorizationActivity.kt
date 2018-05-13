@@ -10,6 +10,7 @@ import com.arkhipov.ayur.mytasksfirebase.App
 import com.arkhipov.ayur.mytasksfirebase.AuthFirebase
 import com.arkhipov.ayur.mytasksfirebase.AuthFirebase.CompleteListener
 import com.arkhipov.ayur.mytasksfirebase.R
+import com.arkhipov.ayur.mytasksfirebase.auth_profile.AuthProfileActivity
 import com.arkhipov.ayur.mytasksfirebase.log.Log
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_authorization.*
@@ -84,36 +85,66 @@ class AuthorizationActivity : AppCompatActivity() {
     }
 
     fun signIn(email: String, password: String) {
-        mAuth.signIn(email, password, object : CompleteListener {
+        mAuth.signIn(email, password,
+                object : CompleteListener {
             override fun complete() {
-                Log.d("signInWithEmail:success")
+                /*Log.d("signInWithEmail:success")
                 val user = mAuth.getCurrentUser()
-                updateUI(user)
+                updateUI(user)*/
+                completeSignIn()
             }
 
             override fun notComplete(exception: Exception) {
+                /*Log.w("signInWithEmail:failure", exception)
+                //Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                outToast("Authentication failed.")
+                updateUI(null)*/
                 Log.w("signInWithEmail:failure", exception)
                 //Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
                 outToast("Authentication failed.")
                 updateUI(null)
             }
-        })
-//        mAuth.signInWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(this) { task ->
-//                    if (task.isSuccessful) {
-//                        // Sign in success, update UI with the signed-in user's information
-//                        Log.d("signInWithEmail:success")
-//                        val user = mAuth.currentUser
-//                        updateUI(user)
-//                    } else {
-//                        // If sign in fails, display a message to the user.
-//                        Log.w("signInWithEmail:failure", task.exception)
-//                        Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
-//                        updateUI(null)
-//                    }
-//
-//                    // ...
-//                }
+        }
+
+        /*        object : CompleteListener.Complete {
+                    override fun complete() {
+                        completeSignIn()
+                    }
+
+                }, object : CompleteListener.NotComplete {
+                    override fun notComplete(exception: Exception) {
+                        notCompleteSignIn(exception)
+                    }
+        }*/)
+        /*mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d("signInWithEmail:success")
+                        val user = mAuth.currentUser
+                        updateUI(user)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w("signInWithEmail:failure", task.exception)
+                        Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                        updateUI(null)
+                    }
+
+                    // ...
+                }*/
+    }
+
+    fun completeSignIn(){
+        Log.d("signInWithEmail:success")
+        val user = mAuth.getCurrentUser()
+        updateUI(user)
+    }
+
+    fun notCompleteSignIn(exception: Exception) {
+        Log.w("signInWithEmail:failure", exception)
+        //Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
+        outToast("Authentication failed.")
+        updateUI(null)
     }
 
     fun updateUI(user: FirebaseUser?) {
@@ -163,8 +194,9 @@ class AuthorizationActivity : AppCompatActivity() {
     }
 
     fun goToProfileActivity() {
-        val intent = Intent(this, AuthorizationActivity::class.java)
+        val intent = Intent(this, AuthProfileActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
 }
