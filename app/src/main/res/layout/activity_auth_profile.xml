@@ -10,21 +10,15 @@
         android:layout_height="wrap_content"
         android:padding="32dp" />
 
-    <EditText
-        android:id="@+id/et_task_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp" />
-
-    <EditText
-        android:id="@+id/et_task_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <Button
-        android:id="@+id/btn_task_submit"
+        android:id="@+id/btn_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/submit" />
+        android:text="@string/task" />
+
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

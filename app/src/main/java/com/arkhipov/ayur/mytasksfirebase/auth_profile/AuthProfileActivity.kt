@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import com.arkhipov.ayur.mytasksfirebase.App
 import com.arkhipov.ayur.mytasksfirebase.R
+import com.arkhipov.ayur.mytasksfirebase.R.id.tv_profile
+import com.arkhipov.ayur.mytasksfirebase.tasks.TasksFragment
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_auth_profile.*
 
@@ -14,7 +16,7 @@ class AuthProfileActivity : AppCompatActivity() {
 
     lateinit var tvProfile: TextView
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth_profile)
@@ -28,8 +30,11 @@ class AuthProfileActivity : AppCompatActivity() {
                 "Display name: ${firebaseUser.displayName},\n" +
                 "Верифицирован?: ${firebaseUser.isEmailVerified}"
 
-        btn_task_submit.setOnClickListener {
-
+        btn_task.setOnClickListener {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment, TasksFragment(), TasksFragment::javaClass.toString())
+                    .commit()
         }
 
     }

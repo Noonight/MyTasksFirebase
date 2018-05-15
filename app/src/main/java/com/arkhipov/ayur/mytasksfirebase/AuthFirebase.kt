@@ -16,10 +16,7 @@ class AuthFirebase(val mAuth: FirebaseAuth = FirebaseAuth.getInstance()) {
                             completeListener.complete()
                         } else {
                             completeListener.notComplete(task.exception!!)
-//                            completeListener.notComplete(task.exception!!)
                         }
-
-                        // ...
                     }
         }
 
@@ -34,10 +31,7 @@ class AuthFirebase(val mAuth: FirebaseAuth = FirebaseAuth.getInstance()) {
                             completeListener.complete()
                         } else {
                             completeListener.notComplete(task.exception!!)
-//                            completeListener.notComplete(task.exception!!)
                         }
-
-                        // ...
                     }
         }
 
@@ -50,13 +44,6 @@ class AuthFirebase(val mAuth: FirebaseAuth = FirebaseAuth.getInstance()) {
     interface CompleteListener {
         fun complete()
         fun notComplete(exception: Exception)
-        /*interface Complete {
-            fun complete()
-        }
-
-        interface NotComplete {
-            fun notComplete(exception: Exception)
-        }*/
     }
 
 }

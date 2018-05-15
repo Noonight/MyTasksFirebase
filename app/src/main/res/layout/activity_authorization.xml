@@ -7,6 +7,12 @@
     android:padding="18dp"
     tools:context=".authorization.AuthorizationActivity">
 
+    <Button
+        android:id="@+id/btn_startSignIn"
+        android:text="@string/start_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <View
         android:id="@+id/viewL"
         android:layout_width="match_parent"

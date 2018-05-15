@@ -13,11 +13,15 @@ class App : Application() {
 
         lateinit var authFirebase: AuthFirebase
         fun getAuth() = authFirebase
+
+        lateinit var fireStore: FirestoreFirebase
+        fun getFirestore() = fireStore
     }
 
     override fun onCreate() {
         super.onCreate()
         mInstance = this
         authFirebase = AuthFirebase()
+        fireStore = FirestoreFirebase()
     }
 }

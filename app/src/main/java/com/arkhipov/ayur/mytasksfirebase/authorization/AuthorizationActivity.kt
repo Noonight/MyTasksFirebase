@@ -1,5 +1,6 @@
 package com.arkhipov.ayur.mytasksfirebase.authorization
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -12,14 +13,24 @@ import com.arkhipov.ayur.mytasksfirebase.AuthFirebase.CompleteListener
 import com.arkhipov.ayur.mytasksfirebase.R
 import com.arkhipov.ayur.mytasksfirebase.auth_profile.AuthProfileActivity
 import com.arkhipov.ayur.mytasksfirebase.log.Log
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.IdpResponse
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_authorization.*
 import kotlinx.android.synthetic.main.toast.view.*
+import java.util.*
 
 
 class AuthorizationActivity : AppCompatActivity() {
 
+    private companion object {
+        val RC_SIGN_IN: Int = 123
+    }
+
     private lateinit var mAuth: AuthFirebase
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +45,10 @@ class AuthorizationActivity : AppCompatActivity() {
 
         tv_registration.setOnClickListener {
             createAccount(et_email.text.toString(), et_password.text.toString())
+        }
+
+        btn_startSignIn.setOnClickListener {
+            startSignInActivity()
         }
     }
 
@@ -199,4 +214,32 @@ class AuthorizationActivity : AppCompatActivity() {
         finish()
     }
 
+    fun startSignInActivity() {
+        val providers: List<AuthUI.IdpConfig> = Arrays.asList(
+                    AuthUI.IdpConfig.EmailBuilder().build(),
+                    AuthUI.IdpConfig.GoogleBuilder().build()
+                )
+        startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .build(),
+                RC_SIGN_IN
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RC_SIGN_IN) {
+            val response = IdpResponse.fromResultIntent(data)
+            if (resultCode == Activity.RESULT_OK) {
+                val user = FirebaseAuth.getInstance().currentUser
+                showToast(true)
+                registrationSuccesfull()
+            } else {
+                showToast(false)
+            }
+        }
+    }
 }
